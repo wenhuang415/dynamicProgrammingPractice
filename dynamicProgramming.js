@@ -53,7 +53,7 @@ const gridTab = (m,n) => {
     //console.log(table)
     console.log(table[m][n])
 }
-gridTab(3,3)
+//gridTab(3,3)
 
 //m = target, n = length of arrary
 //O(n^m)
@@ -75,6 +75,26 @@ const canSum = (target, numbers, memo={}) => {
     memo[target] = false;
     return false;
 };
+
+const canSumTab = (target, numbers) => {
+    const table = Array(target+1).fill(false)
+
+    //base case
+    table[0] = true;
+
+    for(let i = 0; i <= target; i++) {
+        if(table[i] === true) {//only change offset of table if current index is true
+            for(let num of numbers) {
+                if(i+num <= target)//check for out of bound
+                table[i+num] = true
+            }
+        }
+    }
+    //console.log(table)
+    return table[target]
+}
+console.log(canSumTab(300,[7,14]))
+console.log(canSumTab(707,[7,14]))
 
 //m = target, n = length of arrary
 //O(n^m * m)  without memoization 
